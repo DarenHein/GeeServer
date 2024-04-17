@@ -7,11 +7,9 @@ document.addEventListener('DOMContentLoaded',function(){
     boton.addEventListener('click' , function(){
         var correo = document.getElementById('email').value
         var contra = document.getElementById('password').value
-        validadciones(correo,contra)
+        if(correo == "" || contra == ""){
+            console.log("hola")
+        }
+    
     })
 })
-
-function validadciones(correo,contra){
-    // todas las validaciones 
-
-}
