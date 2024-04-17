@@ -15,10 +15,24 @@ document.addEventListener('DOMContentLoaded', function(){
             mensaje.innerHTML = "Campo Vacio";
             mensaje2.innerHTML = "Campo Vacio";
         } else {
-            if (correo.includes(arreglo[0]) || correo.includes(arreglo[1])){
-                mensaje.innerText = "pasa";
+            if (!correo.includes(arreglo[0]) || correo.includes(arreglo[1])){
+                mensaje.innerText = "Sintaxis incorrecta";
             } else {
-                mensaje.innerHTML = "no pasa";
+
+                const url = "http://127.0.0.1:3000/ingreso/" + correo 
+
+                fetch(url)
+
+                .then(response => {
+                    if(!response.ok){
+                        console.log("no se pudo realizar la solicitud")
+                    }else{
+                        return response.json()
+                    }
+                })
+                .then(data => {
+                    console.log(data)
+                })
             }
         }
     });

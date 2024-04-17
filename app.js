@@ -5,6 +5,7 @@ const mysql = require('mysql')
 const express = require('express')
 const app = express()
 const path = require('path')
+const cors = require('cors')
 // aqui van las concexiones de las base de datos pero cuando la tengamos 
 const conexion = mysql.createConnection({
 
@@ -13,6 +14,15 @@ const conexion = mysql.createConnection({
 	password : '5882',
 	database : 'alumnos'
 })
+app.use(express.urlencoded({ extended: true }))
+// Configuración de CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 conexion.connect((error)  => {
 	if (error){
@@ -22,8 +32,6 @@ conexion.connect((error)  => {
 	}
 
 })
-
-
 
 app.use(express.static(path.join(__dirname,'public')))
 
@@ -41,5 +49,11 @@ app.get('/login' , (req,res) => {
 
 })
 
+// ahora recibiremos datos desde inico.html 
+app.get('/ingreso/:correo', (req,res) => {
+
+	var correo = req.params.correo
+	console.log(correo)
+})
 
 module.exports = app 
