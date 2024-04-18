@@ -14,6 +14,7 @@ const conexion = mysql.createConnection({
 	password : '5882',
 	database : 'alumnos'
 })
+app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 // Configuración de CORS
 app.use((req, res, next) => {
@@ -64,6 +65,7 @@ app.get('/ingreso/:correo/:contra', (req,res) => {
 		}else {
 			res.json(resultado)
 			console.log("Exito")
+			console.log(resultado)
 		}
 	})
 })
