@@ -2,11 +2,16 @@
 
 document.addEventListener('DOMContentLoaded',function(){
     var busqueda = document.getElementById('busqueda')
-    var mensaje = document.getElementById('busqueda').value
+    var boton = document.getElementById('boton')
 
     busqueda.addEventListener('keydown', function(event){
         if(event.key === 'Enter'){
-            console.log(mensaje)            
+            var valorInput = event.target.value;
+            console.log(valorInput)       
         }   
+    })
+    boton.addEventListener('click',function(){
+        var campo = document.getElementById('busqueda').value
+        console.log(campo)
     })
 })
