@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 mensaje.innerText = "Sintaxis incorrecta";
             } else {
 
-                const url = "http://127.0.0.1:3000/ingreso/" + correo 
+                const url = "http://127.0.0.1:3000/ingreso/" + correo + "/" + contra
 
                 fetch(url)
 
@@ -31,7 +31,16 @@ document.addEventListener('DOMContentLoaded', function(){
                     }
                 })
                 .then(data => {
-                    console.log(data)
+                   var arreglo = data
+                   var longitud =  arreglo.length 
+                   if(longitud <= 0){
+                        mensaje.innerHTML = "No existe la cuenta o algun campo esta mal "
+                   }else{
+                        window.location.href = "app.html"
+                   }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
             }
         }

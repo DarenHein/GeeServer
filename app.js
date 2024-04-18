@@ -50,10 +50,22 @@ app.get('/login' , (req,res) => {
 })
 
 // ahora recibiremos datos desde inico.html 
-app.get('/ingreso/:correo', (req,res) => {
+app.get('/ingreso/:correo/:contra', (req,res) => {
 
 	var correo = req.params.correo
+	var contra = req.params.contra
 	console.log(correo)
+	console.log(contra)
+	const consulta = "select email from coordinador where email = ? and contra = ? "
+	conexion.query(consulta , [correo,contra] , (error,resultado) => {
+		// 
+		if(error){
+			console.log("erro en el respuesta" , error)
+		}else {
+			res.json(resultado)
+			console.log("Exito")
+		}
+	})
 })
 
 module.exports = app 
