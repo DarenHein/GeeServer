@@ -46,10 +46,6 @@ function filtro(dato){
         // aqui empezamos lo que es hacer la solicitud en en cada caso 
         switch(dato){
             case "alumnos" :
-                var mensaje = document.createElement('h1')
-                mensaje.innerHTML = "Alumnos : "
-                document.body.appendChild(mensaje)
-                
                 const url = "http://127.0.0.1:3000/mostrar/" + dato
                 fetch(url)
                 
@@ -95,11 +91,8 @@ function filtro(dato){
                         }
                         tabla.appendChild(fila)
                     }
-    
-
                     
-                    document.body.appendChild(tabla)
-                    
+                    document.body.appendChi(tabla)                
 
                 })
                 .catch(error => {
@@ -107,6 +100,7 @@ function filtro(dato){
                 })
 
                 break
+                
             case "docentes" :
                 var mensaje = document.createElement('h1')
                 mensaje.innerHTML = "Docentes : "
