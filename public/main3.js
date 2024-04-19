@@ -1,6 +1,6 @@
 // este js esta vinculado a app.html 
 
-document.addEventListener('DOMContentLoaded',function(){
+document.addEventListener('DOMContentLoaded', function () {
     var busqueda = document.getElementById('busqueda')
     var boton = document.getElementById('boton')
     /*
@@ -21,109 +21,151 @@ document.addEventListener('DOMContentLoaded',function(){
         console.log(error)
     })
     */
-    busqueda.addEventListener('keydown', function(event){
-        if(event.key === 'Enter'){
+    busqueda.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
             var valorInput = event.target.value;
-            filtro(valorInput) 
-        }   
+            filtro(valorInput)
+        }
     })
-    boton.addEventListener('click',function(){
-        var campo = document.getElementById('busqueda').value 
+    boton.addEventListener('click', function () {
+        var campo = document.getElementById('busqueda').value
         filtro(campo)
     })
 })
 
 // primero hacemos un filtro 
 
-function filtro(dato){
+function filtro(dato) {
 
     // solo va aver numeros por el momento 
     // si lelga a encontrar una palabra que no sea de las recervadas alv 
-    
-    const palabra = ["alumnos","docentes"]
-    
-    if (dato == palabra[0] || dato == palabra[1]){
+
+    const palabra = ["alumnos", "docentes"]
+
+    if (dato == palabra[0] || dato == palabra[1]) {
         // aqui empezamos lo que es hacer la solicitud en en cada caso 
-        switch(dato){
-            case "alumnos" :
-                var mensaje = document.createElement('h1')
-                mensaje.innerHTML = "Alumnos : "
-                document.body.appendChild(mensaje)
-                
+        switch (dato) {
+            case "alumnos":
                 const url = "http://127.0.0.1:3000/mostrar/" + dato
                 fetch(url)
-                
-                .then(response => {
-                    if(!response.ok){
-                        console.log("error")
-                    }else {
-                        return response.json()
-                    }
-                })
-                .then(data => {
-                    
-                    const arreglo = data
 
-                    const elementos = arreglo.length
-                    
-                    // primero tomamos las llaves del primer elemento del arreglo 
-                    const llaves = Object.keys(arreglo[0])
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log("error")
+                        } else {
+                            return response.json()
+                        }
+                    })
+                    .then(data => {
 
-                    // ahora creamos la tabla 
-                    var tabla = document.createElement('table')
-                    tabla.setAttribute('border','1')
+                        const arreglo = data
 
-                    var fila = document.createElement('tr')
+                        const elementos = arreglo.length
 
-                    for(let i = 0 ; i < llaves.length ; i++){
-                        var celda = document.createElement('th')
-                        celda.innerHTML = llaves[i]
-                        fila.appendChild(celda)
-                    }
+                        // primero tomamos las llaves del primer elemento del arreglo 
+                        const llaves = Object.keys(arreglo[0])
 
-                    tabla.appendChild(fila)
+                        // ahora creamos la tabla 
+                        var tabla = document.createElement('table')
+                        tabla.setAttribute('border', '1')
 
-                    // agregando los datos ala por fila 
-
-                    for (let i = 0 ; i < elementos ; i++){
                         var fila = document.createElement('tr')
-                        var datos = Object.values(arreglo[i])
-                        for(let j = 0 ; j < datos.length ; j++){
-                            var celda = document.createElement('td')
-                            celda.innerHTML = datos[j]
+
+                        for (let i = 0; i < llaves.length; i++) {
+                            var celda = document.createElement('th')
+                            celda.innerHTML = llaves[i]
                             fila.appendChild(celda)
                         }
+
                         tabla.appendChild(fila)
-                    }
-    
 
-                    
-                    document.body.appendChild(tabla)
-                    
+                        // agregando los datos ala por fila 
 
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                        for (let i = 0; i < elementos; i++) {
+                            var fila = document.createElement('tr')
+                            var datos = Object.values(arreglo[i])
+                            for (let j = 0; j < datos.length; j++) {
+                                var celda = document.createElement('td')
+                                celda.innerHTML = datos[j]
+                                fila.appendChild(celda)
+                            }
+                            tabla.appendChild(fila)
+                        }
+
+                        document.body.appendChild(tabla)
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
 
                 break
-            case "docentes" :
-                var mensaje = document.createElement('h1')
-                mensaje.innerHTML = "Docentes : "
-                document.body.appendChild(mensaje)
 
+            case "docentes":
+
+                const url2 = "http://127.0.0.1:3000/mostrar/" + dato
+                console.log(url2)
+                fetch(url2)
+
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log("error")
+                        } else {
+                            return response.json()
+                        }
+                    })
+                    .then(data => {
+
+                        const arreglo = data
+
+                        const elementos = arreglo.length
+
+                        // primero tomamos las llaves del primer elemento del arreglo 
+                        const llaves = Object.keys(arreglo[0])
+
+                        // ahora creamos la tabla 
+                        var tabla = document.createElement('table')
+                        tabla.setAttribute('border', '1')
+
+                        var fila = document.createElement('tr')
+
+                        for (let i = 0; i < llaves.length; i++) {
+                            var celda = document.createElement('th')
+                            celda.innerHTML = llaves[i]
+                            fila.appendChild(celda)
+                        }
+
+                        tabla.appendChild(fila)
+
+                        // agregando los datos ala por fila 
+
+                        for (let i = 0; i < elementos; i++) {
+                            var fila = document.createElement('tr')
+                            var datos = Object.values(arreglo[i])
+                            for (let j = 0; j < datos.length; j++) {
+                                var celda = document.createElement('td')
+                                celda.innerHTML = datos[j]
+                                fila.appendChild(celda)
+                            }
+                            tabla.appendChild(fila)
+                        }
+
+                        document.body.appendChild(tabla)
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
 
                 break
         }
-    }else {
-        if(dato){}
+    } else {
+        if (dato) { }
     }
 }
 
-
-
-function verificar(valor){
+function verificar(valor) {
     // aqui hacremos la solicitu no importa que se al boton o 
     // el cmapo de texto 
-    
+
 }
