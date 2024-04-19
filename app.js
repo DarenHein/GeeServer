@@ -72,7 +72,7 @@ app.get('/ingreso/:correo/:contra', (req,res) => {
 
 // ruta de busqueda por alumno de manera individual 
 
-app.get('/alumno/:id' , (req.res) => {
+app.get('/alumno/:id' , (req,res) => {
 	var id = req.params.id
 	const consulta = "select * from alumnos where id = ?"
 	conexion.query(consulta , [id] , (error , resultado ) => {
@@ -83,6 +83,34 @@ app.get('/alumno/:id' , (req.res) => {
 			res.json(resultado)
 		}
 	})
+})
+
+// ruta docente 
+
+app.get('/mostrar/:palabra' , (req,res) => {
+	var palabra = req.params.palabra
+	switch(palabra){
+		case "alumnos":
+			const consulta = "select * from alumnos"
+			conexion.query(consulta, [palabra] , (error, resultado) => {
+					if(error){
+						console.log(error)
+					}else{
+						res.json(resultado)
+					}
+			})
+		break;
+		case "docentes" :
+			const consulta2 =  "select * from profesores"
+			conexion.query(consulta2 , [palabra] , (error , resultado) => {
+				if(error){
+					console.log("error en la consulta")
+				}else{
+					res.json(resultado)
+				}
+			})
+		break; 
+	}
 })
 
 // esta ruta es del boton cunado se presiona en busqueda que retorna 
