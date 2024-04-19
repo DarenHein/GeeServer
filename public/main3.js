@@ -46,6 +46,8 @@ function filtro(dato) {
         // aqui empezamos lo que es hacer la solicitud en en cada caso 
         switch (dato) {
             case "alumnos":
+                var div_tabla = document.getElementById('tablas')
+                div_tabla.innerHTML = " "
                 const url = "http://127.0.0.1:3000/mostrar/" + dato
                 fetch(url)
 
@@ -86,13 +88,14 @@ function filtro(dato) {
                             var datos = Object.values(arreglo[i])
                             for (let j = 0; j < datos.length; j++) {
                                 var celda = document.createElement('td')
+                                
                                 celda.innerHTML = datos[j]
                                 fila.appendChild(celda)
                             }
                             tabla.appendChild(fila)
                         }
 
-                        document.body.appendChild(tabla)
+                        div_tabla.appendChild(tabla)
 
                     })
                     .catch(error => {
@@ -102,7 +105,8 @@ function filtro(dato) {
                 break
 
             case "docentes":
-
+                var div_tabla2 = document.getElementById('tablas')
+                div_tabla2.innerHTML = " " 
                 const url2 = "http://127.0.0.1:3000/mostrar/" + dato
                 console.log(url2)
                 fetch(url2)
@@ -150,7 +154,7 @@ function filtro(dato) {
                             tabla.appendChild(fila)
                         }
 
-                        document.body.appendChild(tabla)
+                        div_tabla2.appendChild(tabla)
 
                     })
                     .catch(error => {
