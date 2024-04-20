@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(url)
     .then(response => {
         if(!response.ok){
-            console.log("no se pudp")
+            imagen_404()
         }else {
             return response.json()
         }
@@ -52,7 +52,7 @@ function filtro(dato) {
 
                     .then(response => {
                         if (!response.ok) {
-                            console.log("error")
+                            imagen_404()
                         } else {
                             return response.json()
                         }
@@ -89,10 +89,10 @@ function filtro(dato) {
                             for (let j = 0; j < datos.length; j++) {
                                 var celda = document.createElement('td')
                                 var bandera = isNaN(datos[j])
-                                if(j == 0){
+                                if (j == 0) {
                                     celda.style.background = "yellow"
                                 }
-                                if(bandera == false && j !== 0 && datos[j] < 6){
+                                if (bandera == false && j !== 0 && datos[j] < 6) {
                                     celda.style.background = "red"
                                     celda.style.color = "white"
                                 }
@@ -113,7 +113,7 @@ function filtro(dato) {
             case "docentes":
 
                 var div_tabla2 = document.getElementById('tablas')
-                div_tabla2.innerHTML = " " 
+                div_tabla2.innerHTML = " "
                 const url2 = "http://127.0.0.1:3000/mostrar/" + dato
                 console.log(url2)
 
@@ -121,7 +121,7 @@ function filtro(dato) {
 
                     .then(response => {
                         if (!response.ok) {
-                            console.log("error")
+                            imagen_404()
                         } else {
                             return response.json()
                         }
@@ -153,7 +153,7 @@ function filtro(dato) {
                             var datos = Object.values(arreglo[i])
                             for (let j = 0; j < datos.length; j++) {
                                 var celda = document.createElement('td')
-                                if(j == 0 ){
+                                if (j == 0) {
                                     celda.style.background = "yellow"
                                 }
                                 celda.innerHTML = datos[j]
@@ -172,55 +172,76 @@ function filtro(dato) {
                 break
         }
     } else {
-        
+
         var bandera = isNaN(dato)
 
-        switch(bandera){
+        switch (bandera) {
 
-            case true :
-               
+            case true:
+
                 var div_tabla = document.getElementById('tablas')
                 div_tabla.innerHTML = " "
-                
+
                 break
 
-            case false : 
+            case false:
 
-                    var div = document.getElementById('tablas')
-                    div.innerHTML = ' '
+                var div = document.getElementById('tablas')
+                div.innerHTML = ' '
 
-                    const url4 = 'http://127.0.0.1:3000/alumnos/' + dato
+                const url4 = 'http://127.0.0.1:3000/alumnos/' + dato
 
-                    fetch(url4)
+                fetch(url4)
 
                     .then(response => {
-                        if(!response.ok){
-                            var imagen = document.createElement('img')
-                            imagen.setAttribute('src','/icons/error_servidor.png')
-                            imagen.setAttribute('width','500px')
-                            div.appendChild(imagen)
-                        }else{
+                        if (!response.ok) {
+                            imagen_404()
+                        } else {
                             return response.json()
                         }
                     })
                     .then(data => {
-                        
+
                         var arreglo = data
                         var longitud = arreglo.length
 
-                        switch(longitud){
-                            case 0 : 
+                        switch (longitud) {
+                            case 0:
                                 console.log('no llego nada')
                                 // aquii hay que poner imagen de que no se ecnotro nada 
                                 break
-                            case 1 :
-                                console.log('llego un dato o mas') 
+                            case 1:
+                                console.log('llego un dato o mas')
                                 // cremaos tabla 
-                                console
+                                const llaves = Object.keys(arreglo[0])
+
+                                var tabla = document.createElement('table')
+                                tabla.setAttribute('border', '1')
+
+                                var fila = document.createElement('tr')
+
+                                for (let i = 0; i < llaves.length; i++) {
+                                    var celda = document.createElement('th')
+                                    celda.style.background = "cyan"
+                                    celda.innerHTML = llaves[i]
+                                    fila.appendChild(celda)
+                                }
+
+                                tabla.appendChild(fila)
+                                div.appendChild(tabla)
                         }
                     })
-                    
-                break; 
+
+                break;
         }
     }
+}
+
+function imagen_404() {
+    var div = document.getElementById('tablas')
+    div.innerHTML = ' '
+    var imagen = document.createElement('img')
+    imagen.setAttribute('src', '/icons/error_servidor.png')
+    imagen.setAttribute('width', '500px')
+    div.appendChild(imagen)
 }
