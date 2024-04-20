@@ -37,15 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function filtro(dato) {
 
-    // solo va aver numeros por el momento 
-    // si lelga a encontrar una palabra que no sea de las recervadas alv 
-
     const palabra = ["alumnos", "docentes"]
 
     if (dato == palabra[0] || dato == palabra[1]) {
         // aqui empezamos lo que es hacer la solicitud en en cada caso 
         switch (dato) {
+
             case "alumnos":
+
                 var div_tabla = document.getElementById('tablas')
                 div_tabla.innerHTML = " "
                 const url = "http://127.0.0.1:3000/mostrar/" + dato
@@ -112,10 +111,12 @@ function filtro(dato) {
                 break
 
             case "docentes":
+
                 var div_tabla2 = document.getElementById('tablas')
                 div_tabla2.innerHTML = " " 
                 const url2 = "http://127.0.0.1:3000/mostrar/" + dato
                 console.log(url2)
+
                 fetch(url2)
 
                     .then(response => {
@@ -131,10 +132,8 @@ function filtro(dato) {
 
                         const elementos = arreglo.length
 
-                        // primero tomamos las llaves del primer elemento del arreglo 
                         const llaves = Object.keys(arreglo[0])
 
-                        // ahora creamos la tabla 
                         var tabla = document.createElement('table')
                         tabla.setAttribute('border', '1')
 
@@ -148,8 +147,6 @@ function filtro(dato) {
                         }
 
                         tabla.appendChild(fila)
-
-                        // agregando los datos ala por fila 
 
                         for (let i = 0; i < elementos; i++) {
                             var fila = document.createElement('tr')
@@ -175,32 +172,29 @@ function filtro(dato) {
                 break
         }
     } else {
-        // enc aso de la baara de busqueda no entren las palabras reservadas 
+        
         var bandera = isNaN(dato)
+
         switch(bandera){
+
             case true :
-                // quiere decir que es una cadena
-                console.log(dato)
-                console.log("estamos en el true")
-                console.log(typeof(dato)) 
+               
+                var div_tabla = document.getElementById('tablas')
+                div_tabla.innerHTML = " "
+                
                 break
+
             case false : 
-                // quiere decir que es un numero 
+
                     var div = document.getElementById('tablas')
-                    console.log(dato)
-                    console.log("estamos en el false")
-                    console.log(typeof(dato))
-                    // ahora empezamos el fetch pero en una ruta creo que aprte 
-                    // que busque en alumnos por el ide 
+                    div.innerHTML = ' '
+
                     const url4 = 'http://127.0.0.1:3000/alumnos/' + dato
 
                     fetch(url4)
 
                     .then(response => {
-                        var bandera = response.ok
-                        console.log(bandera)
                         if(!response.ok){
-                            console.log("error en la solicitud")
                             var imagen = document.createElement('img')
                             imagen.setAttribute('src','/icons/error_servidor.png')
                             imagen.setAttribute('width','500px')
@@ -210,7 +204,20 @@ function filtro(dato) {
                         }
                     })
                     .then(data => {
-                        console.log(data)
+                        
+                        var arreglo = data
+                        var longitud = arreglo.length
+
+                        switch(longitud){
+                            case 0 : 
+                                console.log('no llego nada')
+                                // aquii hay que poner imagen de que no se ecnotro nada 
+                                break
+                            case 1 :
+                                console.log('llego un dato o mas') 
+                                // cremaos tabla 
+                                console
+                        }
                     })
                     
                 break; 
