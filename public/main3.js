@@ -1,247 +1,274 @@
-// este js esta vinculado a app.html 
-
 document.addEventListener('DOMContentLoaded', function () {
-    var busqueda = document.getElementById('busqueda')
-    var boton = document.getElementById('boton')
+    var busqueda = document.getElementById('busqueda');
+    var boton = document.getElementById('boton');
     /*
-    const url = ""
+    const url = "";
 
     fetch(url)
     .then(response => {
-        if(!response.ok){
-            imagen_404()
-        }else {
-            return response.json()
+        if (!response.ok) {
+            imagen_404();
+        } else {
+            return response.json();
         }
     })
     .then(data =>{
          
     })
     .catch(error => {
-        console.log(error)
-    })
+        console.log(error);
+    });
     */
     busqueda.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             var valorInput = event.target.value;
-            filtro(valorInput)
+            filtro(valorInput);
         }
-    })
+    });
     boton.addEventListener('click', function () {
-        var campo = document.getElementById('busqueda').value
-        filtro(campo)
-    })
-})
+        var campo = document.getElementById('busqueda').value;
+        filtro(campo);
+    });
+});
 
-// primero hacemos un filtro 
+// Primero hacemos un filtro 
+function filtro(dato){
 
-function filtro(dato) {
-
-    const palabra = ["alumnos", "docentes"]
+    const palabra = ["alumnos", "docentes"];
 
     if (dato == palabra[0] || dato == palabra[1]) {
-        // aqui empezamos lo que es hacer la solicitud en en cada caso 
+        // Aquí empezamos lo que es hacer la solicitud en en cada caso 
         switch (dato) {
 
             case "alumnos":
 
-                var div_tabla = document.getElementById('tablas')
-                div_tabla.innerHTML = " "
-                const url = "http://127.0.0.1:3000/mostrar/" + dato
+                var div_tabla = document.getElementById('tablas');
+                div_tabla.innerHTML = " ";
+                const url = "http://127.0.0.1:3000/mostrar/" + dato;
                 fetch(url)
-
                     .then(response => {
                         if (!response.ok) {
-                            imagen_404()
+                            imagen_404();
                         } else {
-                            return response.json()
+                            return response.json();
                         }
                     })
                     .then(data => {
 
-                        const arreglo = data
+                        const arreglo = data;
+                        const elementos = arreglo.length;
 
-                        const elementos = arreglo.length
+                        // Primero tomamos las llaves del primer elemento del arreglo 
+                        const llaves = Object.keys(arreglo[0]);
 
-                        // primero tomamos las llaves del primer elemento del arreglo 
-                        const llaves = Object.keys(arreglo[0])
+                        // Ahora creamos la tabla 
+                        var tabla = document.createElement('table');
+                        tabla.setAttribute('border', '1');
 
-                        // ahora creamos la tabla 
-                        var tabla = document.createElement('table')
-                        tabla.setAttribute('border', '1')
-
-                        var fila = document.createElement('tr')
+                        var fila = document.createElement('tr');
 
                         for (let i = 0; i < llaves.length; i++) {
-                            var celda = document.createElement('th')
-                            celda.style.background = "cyan"
-                            celda.innerHTML = llaves[i]
-                            fila.appendChild(celda)
+                            var celda = document.createElement('th');
+                            celda.style.background = "cyan";
+                            celda.innerHTML = llaves[i];
+                            fila.appendChild(celda);
                         }
 
-                        tabla.appendChild(fila)
+                        tabla.appendChild(fila);
 
-                        // agregando los datos ala por fila 
+                        // Agregando los datos por fila 
 
                         for (let i = 0; i < elementos; i++) {
-                            var fila = document.createElement('tr')
-                            var datos = Object.values(arreglo[i])
+                            var fila = document.createElement('tr');
+                            var datos = Object.values(arreglo[i]);
                             for (let j = 0; j < datos.length; j++) {
-                                var celda = document.createElement('td')
-                                var bandera = isNaN(datos[j])
+                                var celda = document.createElement('td');
+                                var bandera = isNaN(datos[j]);
                                 if (j == 0) {
-                                    celda.style.background = "yellow"
+                                    celda.style.background = "yellow";
                                 }
                                 if (bandera == false && j !== 0 && datos[j] < 6) {
-                                    celda.style.background = "red"
-                                    celda.style.color = "white"
+                                    celda.style.background = "red";
+                                    celda.style.color = "white";
                                 }
-                                celda.innerHTML = datos[j]
-                                fila.appendChild(celda)
+                                celda.innerHTML = datos[j];
+                                fila.appendChild(celda);
                             }
-                            tabla.appendChild(fila)
+                            tabla.appendChild(fila);
                         }
-                        div_tabla.appendChild(tabla)
+                        div_tabla.appendChild(tabla);
 
                     })
                     .catch(error => {
-                        console.log(error)
-                    })
+                        console.log(error);
+                    });
 
-                break
+                break;
 
             case "docentes":
 
-                var div_tabla2 = document.getElementById('tablas')
-                div_tabla2.innerHTML = " "
-                const url2 = "http://127.0.0.1:3000/mostrar/" + dato
-                console.log(url2)
+                var div_tabla2 = document.getElementById('tablas');
+                div_tabla2.innerHTML = " ";
+                const url2 = "http://127.0.0.1:3000/mostrar/" + dato;
+                console.log(url2);
 
                 fetch(url2)
-
                     .then(response => {
                         if (!response.ok) {
-                            imagen_404()
+                            imagen_404();
                         } else {
-                            return response.json()
+                            return response.json();
                         }
                     })
                     .then(data => {
 
-                        const arreglo = data
+                        const arreglo = data;
+                        const elementos = arreglo.length;
 
-                        const elementos = arreglo.length
+                        const llaves = Object.keys(arreglo[0]);
 
-                        const llaves = Object.keys(arreglo[0])
+                        var tabla = document.createElement('table');
+                        tabla.setAttribute('border', '1');
 
-                        var tabla = document.createElement('table')
-                        tabla.setAttribute('border', '1')
-
-                        var fila = document.createElement('tr')
+                        var fila = document.createElement('tr');
 
                         for (let i = 0; i < llaves.length; i++) {
-                            var celda = document.createElement('th')
-                            celda.style.background = "cyan"
-                            celda.innerHTML = llaves[i]
-                            fila.appendChild(celda)
+                            var celda = document.createElement('th');
+                            celda.style.background = "cyan";
+                            celda.innerHTML = llaves[i];
+                            fila.appendChild(celda);
                         }
 
-                        tabla.appendChild(fila)
+                        tabla.appendChild(fila);
 
                         for (let i = 0; i < elementos; i++) {
-                            var fila = document.createElement('tr')
-                            var datos = Object.values(arreglo[i])
+                            var fila = document.createElement('tr');
+                            var datos = Object.values(arreglo[i]);
                             for (let j = 0; j < datos.length; j++) {
-                                var celda = document.createElement('td')
+                                var celda = document.createElement('td');
                                 if (j == 0) {
-                                    celda.style.background = "yellow"
+                                    celda.style.background = "yellow";
                                 }
-                                celda.innerHTML = datos[j]
-                                fila.appendChild(celda)
+                                celda.innerHTML = datos[j];
+                                fila.appendChild(celda);
                             }
-                            tabla.appendChild(fila)
+                            tabla.appendChild(fila);
                         }
 
-                        div_tabla2.appendChild(tabla)
+                        div_tabla2.appendChild(tabla);
 
                     })
                     .catch(error => {
-                        console.log(error)
-                    })
+                        console.log(error);
+                    });
 
-                break
+                break;
         }
     } else {
 
-        var bandera = isNaN(dato)
+        var bandera = isNaN(dato);
 
         switch (bandera) {
 
             case true:
 
-                var div_tabla = document.getElementById('tablas')
-                div_tabla.innerHTML = " "
+                var div_tabla = document.getElementById('tablas');
+                div_tabla.innerHTML = " ";
+                
+                // si no esta en las palabras recervadas no sirve
+                imagen_no_resultados()
 
-                break
+
+                break;
 
             case false:
 
-                var div = document.getElementById('tablas')
-                div.innerHTML = ' '
+                var div = document.getElementById('tablas');
+                div.innerHTML = ' ';
 
-                const url4 = 'http://127.0.0.1:3000/alumnos/' + dato
+                const url4 = 'http://127.0.0.1:3000/alumnos/' + dato;
 
                 fetch(url4)
-
                     .then(response => {
                         if (!response.ok) {
-                            imagen_404()
+                            imagen_404();
                         } else {
-                            return response.json()
+                            return response.json();
                         }
                     })
                     .then(data => {
 
-                        var arreglo = data
-                        var longitud = arreglo.length
+                        var arreglo = data;
+                        var elementos = arreglo.length;
 
-                        switch (longitud) {
+                        switch (elementos) {
                             case 0:
-                                console.log('no llego nada')
-                                // aquii hay que poner imagen de que no se ecnotro nada 
-                                break
+                                console.log('No se encontró ningún dato');
+                                // Aquí hay que poner imagen de que no se encontró nada 
+                                imagen_no_resultados()
+                                break;
                             case 1:
-                                console.log('llego un dato o mas')
-                                // cremaos tabla 
-                                const llaves = Object.keys(arreglo[0])
+                                console.log('Llegó un dato o más');
+                                // Creamos tabla 
+                                const llaves = Object.keys(arreglo[0]);
 
-                                var tabla = document.createElement('table')
-                                tabla.setAttribute('border', '1')
+                                var tabla = document.createElement('table');
+                                tabla.setAttribute('border', '1');
 
-                                var fila = document.createElement('tr')
+                                var fila = document.createElement('tr');
 
                                 for (let i = 0; i < llaves.length; i++) {
-                                    var celda = document.createElement('th')
-                                    celda.style.background = "cyan"
-                                    celda.innerHTML = llaves[i]
-                                    fila.appendChild(celda)
+                                    var celda = document.createElement('th');
+                                    celda.style.background = "cyan";
+                                    celda.innerHTML = llaves[i];
+                                    fila.appendChild(celda);
                                 }
+                                tabla.appendChild(fila);
 
-                                tabla.appendChild(fila)
-                                div.appendChild(tabla)
+                                for (let i = 0; i < elementos; i++) {
+                                    var fila = document.createElement('tr');
+                                    var datos = Object.values(arreglo[i]);
+                                    for (let j = 0; j < datos.length; j++) {
+                                        var celda = document.createElement('td');
+                                        var bandera = isNaN(datos[j]);
+                                        if (j == 0) {
+                                            celda.style.background = "yellow";
+                                        }
+                                        if (bandera == false && j !== 0 && datos[j] < 6) {
+                                            celda.style.background = "red";
+                                            celda.style.color = "white";
+                                        }
+                                        celda.innerHTML = datos[j];
+                                        fila.appendChild(celda);
+                                    }
+                                    tabla.appendChild(fila);
+                                }
+                                div.appendChild(tabla);
+                                break;
                         }
                     })
-
+                    .catch(error => {
+                        console.log(error);
+                    });
                 break;
         }
     }
 }
 
 function imagen_404() {
-    var div = document.getElementById('tablas')
-    div.innerHTML = ' '
-    var imagen = document.createElement('img')
-    imagen.setAttribute('src', '/icons/error_servidor.png')
-    imagen.setAttribute('width', '500px')
-    div.appendChild(imagen)
+    var div = document.getElementById('tablas');
+    div.innerHTML = ' ';
+    var imagen = document.createElement('img');
+    imagen.setAttribute('src', '/icons/error_servidor.png');
+    imagen.setAttribute('width', '500px');
+    div.appendChild(imagen);
+}
+
+function imagen_no_resultados(){
+    var div = document.getElementById('tablas');
+    div.innerHTML = ' ';
+    var imagen = document.createElement('img');
+    imagen.setAttribute('src', '/icons/no_resultados.png');
+    imagen.setAttribute('width', '500px');
+    div.appendChild(imagen);
 }
