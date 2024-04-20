@@ -75,6 +75,7 @@ function filtro(dato) {
 
                         for (let i = 0; i < llaves.length; i++) {
                             var celda = document.createElement('th')
+                            celda.style.background = "cyan"
                             celda.innerHTML = llaves[i]
                             fila.appendChild(celda)
                         }
@@ -88,13 +89,19 @@ function filtro(dato) {
                             var datos = Object.values(arreglo[i])
                             for (let j = 0; j < datos.length; j++) {
                                 var celda = document.createElement('td')
-                                
+                                var bandera = isNaN(datos[j])
+                                if(j == 0){
+                                    celda.style.background = "yellow"
+                                }
+                                if(bandera == false && j !== 0 && datos[j] < 6){
+                                    celda.style.background = "red"
+                                    celda.style.color = "white"
+                                }
                                 celda.innerHTML = datos[j]
                                 fila.appendChild(celda)
                             }
                             tabla.appendChild(fila)
                         }
-
                         div_tabla.appendChild(tabla)
 
                     })
