@@ -142,6 +142,7 @@ function filtro(dato) {
 
                         for (let i = 0; i < llaves.length; i++) {
                             var celda = document.createElement('th')
+                            celda.style.background = "cyan"
                             celda.innerHTML = llaves[i]
                             fila.appendChild(celda)
                         }
@@ -155,6 +156,9 @@ function filtro(dato) {
                             var datos = Object.values(arreglo[i])
                             for (let j = 0; j < datos.length; j++) {
                                 var celda = document.createElement('td')
+                                if(j == 0 ){
+                                    celda.style.background = "yellow"
+                                }
                                 celda.innerHTML = datos[j]
                                 fila.appendChild(celda)
                             }
@@ -171,12 +175,24 @@ function filtro(dato) {
                 break
         }
     } else {
-        if (dato) { }
+        // enc aso de la baara de busqueda no entren las palabras reservadas 
+        var bandera = isNaN(dato)
+        switch(bandera){
+            case true :
+                // quiere decir que es una cadena
+                console.log(dato)
+                console.log("estamos en el true")
+                console.log(typeof(dato)) 
+                break
+            case false : 
+                // quiere decir que es un numero 
+                    console.log(dato)
+                    console.log("estamos en el false")
+                    console.log(typeof(dato))
+                    // ahora empezamos el fetch pero en una ruta creo que aprte 
+                    // que busque en alumnos por el ide 
+                    
+                break; 
+        }
     }
-}
-
-function verificar(valor) {
-    // aqui hacremos la solicitu no importa que se al boton o 
-    // el cmapo de texto 
-
 }
