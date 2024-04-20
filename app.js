@@ -72,7 +72,7 @@ app.get('/ingreso/:correo/:contra', (req,res) => {
 
 // ruta de busqueda por alumno de manera individual 
 
-app.get('/alumno/:id' , (req,res) => {
+app.get('/alumnos/:id' , (req,res) => {
 	var id = req.params.id
 	const consulta = "select * from alumnos where id = ?"
 	conexion.query(consulta , [id] , (error , resultado ) => {
@@ -114,5 +114,7 @@ app.get('/mostrar/:palabra' , (req,res) => {
 })
 
 // esta ruta es del boton cunado se presiona en busqueda que retorna 
+
+
 
 module.exports = app 

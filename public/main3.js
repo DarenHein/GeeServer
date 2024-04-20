@@ -186,11 +186,32 @@ function filtro(dato) {
                 break
             case false : 
                 // quiere decir que es un numero 
+                    var div = document.getElementById('tablas')
                     console.log(dato)
                     console.log("estamos en el false")
                     console.log(typeof(dato))
                     // ahora empezamos el fetch pero en una ruta creo que aprte 
                     // que busque en alumnos por el ide 
+                    const url4 = 'http://127.0.0.1:3000/alumnos/' + dato
+
+                    fetch(url4)
+
+                    .then(response => {
+                        var bandera = response.ok
+                        console.log(bandera)
+                        if(!response.ok){
+                            console.log("error en la solicitud")
+                            var imagen = document.createElement('img')
+                            imagen.setAttribute('src','/icons/error_servidor.png')
+                            imagen.setAttribute('width','500px')
+                            div.appendChild(imagen)
+                        }else{
+                            return response.json()
+                        }
+                    })
+                    .then(data => {
+                        console.log(data)
+                    })
                     
                 break; 
         }
