@@ -114,3 +114,20 @@ a:hover {
 a:focus {
     color: rgba(3, 3, 85, 0.466);
 }
+
+.bts1{
+    background-color: beige;
+    position: absolute;
+}
+
+.bts2{
+    background-color: beige;
+    position: absolute;
+
+}
+
+.bts3{
+    background-color: beige;
+    position: absolute;
+
+}
