@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     var busqueda = document.getElementById('busqueda');
     var boton = document.getElementById('boton');
+    var comunicados = document.getElementById('boton1')
     /*
     const url = "";
 
     fetch(url)
     .then(response => {
         if (!response.ok) {
-            imagen_404();
+            imagen_404();   
         } else {
             return response.json();
         }
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(error);
     });
     */
+    
     busqueda.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             var valorInput = event.target.value;
@@ -34,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // Primero hacemos un filtro 
 function filtro(dato){
 
-    const palabra = ["alumnos", "docentes"];
+    const palabra = ["alumnos", "docentes" , "grupos"];
 
-    if (dato == palabra[0] || dato == palabra[1]) {
+    if (dato == palabra[0] || dato == palabra[1] || dato == palabra[2] ) {
         // Aquí empezamos lo que es hacer la solicitud en en cada caso 
         switch (dato) {
 
@@ -163,6 +165,10 @@ function filtro(dato){
                     });
 
                 break;
+
+                case "grupos" :
+                    
+                    break
         }
     } else {
 
@@ -176,7 +182,73 @@ function filtro(dato){
                 div_tabla.innerHTML = " ";
                 
                 // si no esta en las palabras recervadas no sirve
-                imagen_no_resultados()
+                var div = document.getElementById('tablas');
+                div.innerHTML = ' ';
+
+                const url5 = 'http://127.0.0.1:3000/alumnos/' + dato;
+
+                fetch(url5)
+                    .then(response => {
+                        if (!response.ok) {
+                            imagen_404();
+                        } else {
+                            return response.json();
+                        }
+                    })
+                    .then(data => {
+
+                        var arreglo = data;
+                        var elementos = arreglo.length;
+
+                        switch (elementos) {
+                            case 0:
+                                console.log('No se encontró ningún dato');
+                                // Aquí hay que poner imagen de que no se encontró nada 
+                                imagen_no_resultados()
+                                break;
+                            case 1:
+                                console.log('Llegó un dato o más');
+                                // Creamos tabla 
+                                const llaves = Object.keys(arreglo[0]);
+
+                                var tabla = document.createElement('table');
+                                tabla.setAttribute('border', '1');
+
+                                var fila = document.createElement('tr');
+
+                                for (let i = 0; i < llaves.length; i++) {
+                                    var celda = document.createElement('th');
+                                    celda.style.background = "cyan";
+                                    celda.innerHTML = llaves[i];
+                                    fila.appendChild(celda);
+                                }
+                                tabla.appendChild(fila);
+
+                                for (let i = 0; i < elementos; i++) {
+                                    var fila = document.createElement('tr');
+                                    var datos = Object.values(arreglo[i]);
+                                    for (let j = 0; j < datos.length; j++) {
+                                        var celda = document.createElement('td');
+                                        var bandera = isNaN(datos[j]);
+                                        if (j == 0) {
+                                            celda.style.background = "yellow";
+                                        }
+                                        if (bandera == false && j !== 0 && datos[j] < 6) {
+                                            celda.style.background = "red";
+                                            celda.style.color = "white";
+                                        }
+                                        celda.innerHTML = datos[j];
+                                        fila.appendChild(celda);
+                                    }
+                                    tabla.appendChild(fila);
+                                }
+                                div.appendChild(tabla);
+                                break;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
 
 
                 break;

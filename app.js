@@ -113,6 +113,25 @@ app.get('/mostrar/:palabra' , (req,res) => {
 	}
 })
 
+// ruta que nos da el grupo o nos devuelve los grupos 
+
+app.get('/grupos/' , (req,res) => {
+
+	var grupo = req.params.grupo
+
+	const consul = select * from Grupos
+
+	conexion.query(consul ,(error,resultado) => {
+
+		if(error){
+			console.log("no se puede realizar la consulta")
+		}else{
+			res.json(resultado)
+		}
+
+	})
+})
+
 // esta ruta es del boton cunado se presiona en busqueda que retorna 
 
 
