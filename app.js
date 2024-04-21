@@ -109,6 +109,17 @@ app.get('/mostrar/:palabra' , (req,res) => {
 					res.json(resultado)
 				}
 			})
+		break;
+		
+		case 'grupos' :
+			const consulta3 = "select * from Grupos"
+			conexion.query(consulta3,(error,resultado) => {
+				if(error){
+					console.log("error en consulta")
+				}else{
+					res.json(resultado)
+				}
+			})
 		break; 
 	}
 })
@@ -119,7 +130,7 @@ app.get('/grupos/' , (req,res) => {
 
 	var grupo = req.params.grupo
 
-	const consul = select * from Grupos
+	const consul = "select * from Grupos"
 
 	conexion.query(consul ,(error,resultado) => {
 

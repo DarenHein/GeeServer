@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(error);
     });
     */
-    
+
     busqueda.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             var valorInput = event.target.value;
@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Primero hacemos un filtro 
-function filtro(dato){
+function filtro(dato) {
 
-    const palabra = ["alumnos", "docentes" , "grupos"];
+    const palabra = ["alumnos", "docentes", "grupos"];
 
-    if (dato == palabra[0] || dato == palabra[1] || dato == palabra[2] ) {
+    if (dato == palabra[0] || dato == palabra[1] || dato == palabra[2]) {
         // Aquí empezamos lo que es hacer la solicitud en en cada caso 
         switch (dato) {
 
@@ -166,9 +166,64 @@ function filtro(dato){
 
                 break;
 
-                case "grupos" :
-                    
-                    break
+            case "grupos":
+
+                var div_tabla2 = document.getElementById('tablas');
+                div_tabla2.innerHTML = " ";
+                const urlgrupos = "http://127.0.0.1:3000/mostrar/" + dato;
+                console.log(urlgrupos);
+
+                fetch(urlgrupos)
+                    .then(response => {
+                        if (!response.ok) {
+                            imagen_404();
+                        } else {
+                            return response.json();
+                        }
+                    })
+                    .then(data => {
+
+                        const arreglo = data;
+                        const elementos = arreglo.length;
+
+                        const llaves = Object.keys(arreglo[0]);
+
+                        var tabla = document.createElement('table');
+                        tabla.setAttribute('border', '1');
+
+                        var fila = document.createElement('tr');
+
+                        for (let i = 0; i < llaves.length; i++) {
+                            var celda = document.createElement('th');
+                            celda.style.background = "cyan";
+                            celda.innerHTML = llaves[i];
+                            fila.appendChild(celda);
+                        }
+
+                        tabla.appendChild(fila);
+
+                        for (let i = 0; i < elementos; i++) {
+                            var fila = document.createElement('tr');
+                            var datos = Object.values(arreglo[i]);
+                            for (let j = 0; j < datos.length; j++) {
+                                var celda = document.createElement('td');
+                                if (j == 0) {
+                                    celda.style.background = "yellow";
+                                }
+                                celda.innerHTML = datos[j];
+                                fila.appendChild(celda);
+                            }
+                            tabla.appendChild(fila);
+                        }
+
+                        div_tabla2.appendChild(tabla);
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+                break
         }
     } else {
 
@@ -180,7 +235,7 @@ function filtro(dato){
 
                 var div_tabla = document.getElementById('tablas');
                 div_tabla.innerHTML = " ";
-                
+
                 // si no esta en las palabras recervadas no sirve
                 var div = document.getElementById('tablas');
                 div.innerHTML = ' ';
@@ -336,7 +391,7 @@ function imagen_404() {
     div.appendChild(imagen);
 }
 
-function imagen_no_resultados(){
+function imagen_no_resultados() {
     var div = document.getElementById('tablas');
     div.innerHTML = ' ';
     var imagen = document.createElement('img');
