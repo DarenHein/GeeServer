@@ -65,7 +65,6 @@ app.get('/ingreso/:correo/:contra', (req,res) => {
 		}else {
 			res.json(resultado)
 			console.log("Exito")
-			console.log(resultado)
 		}
 	})
 })
@@ -80,7 +79,36 @@ app.get('/alumnos/:id' , (req,res) => {
 			console.log("error en la consulta")
 		}else {
 			console.log("consulta realizada con exito")
-			res.json(resultado)
+			console.log(resultado)
+			var longitud = resultado.length
+			if(longitud != 0 ){
+				res.json(resultado)
+			}else{
+				var consulta_secundaria = "select * from alumnos where nombre = ?"
+				conexion.query(consulta_secundaria , [id] , (error,resultado) => {
+					if(error){
+						console.log("error")
+					}else{
+						// ahora mandmos por grupo 
+						var longitud2 = resultado.length
+						if(longitud2 != 0){
+							res.json(resultado)
+						}else{
+							// ahora buscaremos grupos 
+							var consulta_tercer = "select * from alumnos where grupo = ?"
+							conexion.query(consulta_tercer , [id] , (error,resultado) => {
+								if(error){
+									console.log("error")
+								}else{
+
+									res.json(resultado)
+								}
+							})
+						}
+						
+						}
+				})
+			}
 		}
 	})
 })

@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Primero hacemos un filtro 
-function filtro(dato) {
 
+function filtro(dato) {
+        // primero si el usuario ingresa una de las palabras reservadas 
+        // ara una busqueda personalizada 
     const palabra = ["alumnos", "docentes", "grupos"];
 
     if (dato == palabra[0] || dato == palabra[1] || dato == palabra[2]) {
@@ -232,15 +233,14 @@ function filtro(dato) {
         switch (bandera) {
 
             case true:
-
+                // aqui si manda una cadena 
                 var div_tabla = document.getElementById('tablas');
                 div_tabla.innerHTML = " ";
 
-                // si no esta en las palabras recervadas no sirve
                 var div = document.getElementById('tablas');
                 div.innerHTML = ' ';
 
-                const url5 = 'http://127.0.0.1:3000/alumnos/' + dato;
+                const   url5 = 'http://127.0.0.1:3000/alumnos/' + dato;
 
                 fetch(url5)
                     .then(response => {
@@ -254,15 +254,15 @@ function filtro(dato) {
 
                         var arreglo = data;
                         var elementos = arreglo.length;
+                        // modificar aqui ponemos el else 
 
-                        switch (elementos) {
-                            case 0:
-                                console.log('No se encontró ningún dato');
+                        if(elementos <= 0 ){
+                            console.log('No se encontró ningún dato');
                                 // Aquí hay que poner imagen de que no se encontró nada 
                                 imagen_no_resultados()
-                                break;
-                            case 1:
-                                console.log('Llegó un dato o más');
+                        }else{
+
+                            console.log('Llegó un dato o más');
                                 // Creamos tabla 
                                 const llaves = Object.keys(arreglo[0]);
 
@@ -298,8 +298,9 @@ function filtro(dato) {
                                     tabla.appendChild(fila);
                                 }
                                 div.appendChild(tabla);
-                                break;
+
                         }
+                       
                     })
                     .catch(error => {
                         console.log(error);
