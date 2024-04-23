@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var boton = document.getElementById('boton');
     var boton1 = document.getElementById('boton1')
     var boton2 = document.getElementById('boton2')
+    var boton3 = document.getElementById('boton3')
     /*
     const url = "";
 
@@ -55,6 +56,9 @@ document.addEventListener('DOMContentLoaded', function () {
         div_tabla.innerHTML = " "
         div_contraseña.style.display = 'block'
         comunicados.style.display = 'none'
+    })
+    boton3.addEventListener('click' , function(){
+        console.log("hola mundo")
     })
 });
 
