@@ -53,12 +53,22 @@ document.addEventListener('DOMContentLoaded', function () {
         var div_contraseña = document.getElementById('div3')
         var div_tabla = document.getElementById('tablas')
         var comunicados = document.getElementById('comunicados')
-        div_tabla.innerHTML = " "
+        var div_examenes = document.getElementById('div4')
         div_contraseña.style.display = 'block'
+        div_examenes.style.display = 'none'
+        div_tabla.innerHTML = " "
         comunicados.style.display = 'none'
     })
     boton3.addEventListener('click' , function(){
         console.log("hola mundo")
+        var div_examenes = document.getElementById('div4')
+        var div_contraseña = document.getElementById('div3')
+        var div_tabla = document.getElementById('tablas')
+        var comunicados = document.getElementById('comunicados')
+        div_tabla.innerHTML = " "
+        div_contraseña.style.display = 'none'
+        comunicados.style.display = 'none'
+        div_examenes.style.display = "block"
     })
 });
 
@@ -66,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function filtro(dato) {
     var comunicados = document.getElementById('comunicados')
     var div_contraseña = document.getElementById('div3')
+    var div_examenes = document.getElementById('div4')
     div_contraseña.style.display = 'none'
+    div_examenes.style.display = 'none'
     comunicados.style.display = 'none'
     // primero si el usuario ingresa una de las palabras reservadas 
     // ara una busqueda personalizada 
