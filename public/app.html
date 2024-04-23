@@ -49,10 +49,37 @@
             top: 100px;
             left: 320px;
         }
+        #div3{
+            position: absolute;
+            top: 100px;
+            left: 320px;
+        }
         #boton1{
             position: absolute;
             top: 200px;
             left: 30px;
+        }
+        form {
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .campos{
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -89,6 +116,26 @@
         <br>
         <button id="boton_coumicados">Enviar</button>
     </div>
+
+    <div id="div3">
+        <form action="cambio_contraseña_exitoso.html" method="POST">
+            <h2>Cambio de Contraseña</h2>
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" class="campos" name="matricula" required>
+            
+            <label for="nueva_contraseña">Nueva Contraseña:</label>
+            <input type="password" id="contraseña"  class="campos" name="nueva_contraseña" required>
+            
+            <label for="validar_contraseña">Validar Contraseña:</label>
+            <input type="password" id="contraseña2" class="campos" name="validar_contraseña" required>
+            
+            <input type="submit" value="Enviar">
+        </form>
+       </div>
+
+       <div id="">
+        
+       </div>
     
     <button id="boton1">Comunicados</button>
    

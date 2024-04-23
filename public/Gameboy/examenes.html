@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             height: 100vh;
             margin: 0;
         }
+
         form {
             width: 80%;
             max-width: 400px;
@@ -20,12 +22,14 @@
             border-radius: 8px;
             background-color: #fcfcfc;
         }
+
         input[type="url"],
         select {
             width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 10px;
         }
+
         input[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -37,21 +41,22 @@
         }
     </style>
 </head>
+
 <body>
     <form action="envio_exitoso.html" method="POST">
         <h2>Envío de Exámenes</h2>
         <label for="url">URL:</label>
         <input type="url" id="url" name="url" required>
-        
+
         <label for="grupo">Grupo:</label>
         <select id="grupo" name="grupo">
             <option value="grupo1">Grupo 1</option>
             <option value="grupo2">Grupo 2</option>
             <option value="grupo3">Grupo 3</option>
         </select>
-        
+
         <input type="submit" value="Enviar">
     </form>
 </body>
-</html>
 
+</html>
