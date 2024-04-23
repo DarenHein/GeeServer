@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
             bien en todos los dispositivos 
 
         */
-        #barra{
+        #barra {
             /*esta barra hazla responsive*/
             /*creo que la pude hacer responsive 
             aahora agrega un El GEE en letras grandes y que se vean como el input y el boton que esta centrado al lado derecho pero ahora centrado en la izquierdo */
@@ -26,48 +27,71 @@
             height: 10%;
             background-color: gray;
             display: flex;
-            align-items: center; 
+            align-items: center;
             justify-content: flex-end;
 
         }
 
-        #tablas{
+        #tablas {
             position: absolute;
             top: 100px;
             left: 320px;
         }
-        #div_botones{
+
+        #div_botones {
             position: absolute;
             top: 160px;
             left: 30px;
         }
-        
+        #comunicados {
+            display: none;
+            position: absolute;
+            top: 100px;
+            left: 320px;
+        }
+        #boton1{
+            position: absolute;
+            top: 200px;
+            left: 30px;
+        }
     </style>
 </head>
+
 <body>
     <div id="barra">
-        
-        <input  type="text" id="busqueda" placeholder="Buscar">
+        <input type="text" id="busqueda" placeholder="Buscar">
         <button id="boton">Buscar</button>
-        <div id="tablas">
-
-        </div>
     </div>
-    <div id="div_botones">
-        <div id="botton1">
-            <button class="bts1">Comunicados</button>
-        </div>
-        <br>
-        <div id ="button2">
-            <button class="bts2">boton2</button>
 
-        </div>
-        <br>
-        <div id="button3">
-            <button class="bts3">botton3</button>
+    <div id="tablas">
         
-        </div>
-
     </div>
+
+    <div id="comunicados">
+        <h1>Formulario de Texto</h1>
+        <br>
+        <br>
+        <label for="grupo">Grupo:</label>
+        <select id="grupo" name="grupo">
+        </select>
+        <br>
+        <br>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+            <option value="primordial">Primordial</option>
+            <option value="normal">Normal</option>
+        </select>
+        <br>
+        <br>
+        <label for="texto">Texto:</label>
+        <textarea id="texto" name="texto" rows="4" cols="50" required></textarea>
+        <br>
+        <br>
+        <button id="boton_coumicados">Enviar</button>
+    </div>
+    
+    <button id="boton1">Comunicados</button>
+   
 </body>
+
 </html>

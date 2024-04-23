@@ -100,8 +100,26 @@ app.get('/alumnos/:id' , (req,res) => {
 								if(error){
 									console.log("error")
 								}else{
+									// ahora por el correo
+									var longitud3 = resultado.length
+									if (longitud3 != 0){
+										res.json(resultado)
+									}else{
+										// buscamos por correo 
+										var consulta_cuarta = 'select * from alumnos where correo = ? '
+										conexion.query(consulta_cuarta , [id] , (error,resultado) => {
 
-									res.json(resultado)
+											if(error){
+												console.log("error en conulta",error)
+											}else{
+												res.json(resultado)
+											}
+										})
+
+
+									}
+
+									
 								}
 							})
 						}

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var busqueda = document.getElementById('busqueda');
     var boton = document.getElementById('boton');
-    var comunicados = document.getElementById('boton1')
+    var boton1 = document.getElementById('boton1')
     /*
     const url = "";
 
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     */
 
     busqueda.addEventListener('keydown', function (event) {
+
         if (event.key === 'Enter') {
             var valorInput = event.target.value;
             filtro(valorInput);
@@ -31,12 +32,26 @@ document.addEventListener('DOMContentLoaded', function () {
         var campo = document.getElementById('busqueda').value;
         filtro(campo);
     });
+
+    boton1.addEventListener('click', function () {
+        // primero vamos a desaparecer todo lo que tenag el div 
+        console.log('hola')
+        var div_tabla = document.getElementById('tablas')
+        var div = document.getElementById('comunicados')
+
+        div_tabla.innerHTML = ''
+        div.style.display = 'block'
+
+
+    })
 });
 
 
 function filtro(dato) {
-        // primero si el usuario ingresa una de las palabras reservadas 
-        // ara una busqueda personalizada 
+    var comunicados = document.getElementById('comunicados')
+    comunicados.style.display = 'none'
+    // primero si el usuario ingresa una de las palabras reservadas 
+    // ara una busqueda personalizada 
     const palabra = ["alumnos", "docentes", "grupos"];
 
     if (dato == palabra[0] || dato == palabra[1] || dato == palabra[2]) {
@@ -240,7 +255,7 @@ function filtro(dato) {
                 var div = document.getElementById('tablas');
                 div.innerHTML = ' ';
 
-                const   url5 = 'http://127.0.0.1:3000/alumnos/' + dato;
+                const url5 = 'http://127.0.0.1:3000/alumnos/' + dato;
 
                 fetch(url5)
                     .then(response => {
@@ -256,51 +271,51 @@ function filtro(dato) {
                         var elementos = arreglo.length;
                         // modificar aqui ponemos el else 
 
-                        if(elementos <= 0 ){
+                        if (elementos <= 0) {
                             console.log('No se encontró ningún dato');
-                                // Aquí hay que poner imagen de que no se encontró nada 
-                                imagen_no_resultados()
-                        }else{
+                            // Aquí hay que poner imagen de que no se encontró nada 
+                            imagen_no_resultados()
+                        } else {
 
                             console.log('Llegó un dato o más');
-                                // Creamos tabla 
-                                const llaves = Object.keys(arreglo[0]);
+                            // Creamos tabla 
+                            const llaves = Object.keys(arreglo[0]);
 
-                                var tabla = document.createElement('table');
-                                tabla.setAttribute('border', '1');
+                            var tabla = document.createElement('table');
+                            tabla.setAttribute('border', '1');
 
+                            var fila = document.createElement('tr');
+
+                            for (let i = 0; i < llaves.length; i++) {
+                                var celda = document.createElement('th');
+                                celda.style.background = "cyan";
+                                celda.innerHTML = llaves[i];
+                                fila.appendChild(celda);
+                            }
+                            tabla.appendChild(fila);
+
+                            for (let i = 0; i < elementos; i++) {
                                 var fila = document.createElement('tr');
-
-                                for (let i = 0; i < llaves.length; i++) {
-                                    var celda = document.createElement('th');
-                                    celda.style.background = "cyan";
-                                    celda.innerHTML = llaves[i];
+                                var datos = Object.values(arreglo[i]);
+                                for (let j = 0; j < datos.length; j++) {
+                                    var celda = document.createElement('td');
+                                    var bandera = isNaN(datos[j]);
+                                    if (j == 0) {
+                                        celda.style.background = "yellow";
+                                    }
+                                    if (bandera == false && j !== 0 && datos[j] < 6) {
+                                        celda.style.background = "red";
+                                        celda.style.color = "white";
+                                    }
+                                    celda.innerHTML = datos[j];
                                     fila.appendChild(celda);
                                 }
                                 tabla.appendChild(fila);
-
-                                for (let i = 0; i < elementos; i++) {
-                                    var fila = document.createElement('tr');
-                                    var datos = Object.values(arreglo[i]);
-                                    for (let j = 0; j < datos.length; j++) {
-                                        var celda = document.createElement('td');
-                                        var bandera = isNaN(datos[j]);
-                                        if (j == 0) {
-                                            celda.style.background = "yellow";
-                                        }
-                                        if (bandera == false && j !== 0 && datos[j] < 6) {
-                                            celda.style.background = "red";
-                                            celda.style.color = "white";
-                                        }
-                                        celda.innerHTML = datos[j];
-                                        fila.appendChild(celda);
-                                    }
-                                    tabla.appendChild(fila);
-                                }
-                                div.appendChild(tabla);
+                            }
+                            div.appendChild(tabla);
 
                         }
-                       
+
                     })
                     .catch(error => {
                         console.log(error);
