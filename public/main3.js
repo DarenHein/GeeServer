@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var busqueda = document.getElementById('busqueda');
     var boton = document.getElementById('boton');
     var boton1 = document.getElementById('boton1')
+    var boton2 = document.getElementById('boton2')
     /*
     const url = "";
 
@@ -38,17 +39,30 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('hola')
         var div_tabla = document.getElementById('tablas')
         var div = document.getElementById('comunicados')
+        var div_contraseña = document.getElementById('div3')
 
         div_tabla.innerHTML = ''
         div.style.display = 'block'
+        div_contraseña.style.display = 'none'
 
 
+    })
+
+    boton2.addEventListener('click',function(){
+        var div_contraseña = document.getElementById('div3')
+        var div_tabla = document.getElementById('tablas')
+        var comunicados = document.getElementById('comunicados')
+        div_tabla.innerHTML = " "
+        div_contraseña.style.display = 'block'
+        comunicados.style.display = 'none'
     })
 });
 
 
 function filtro(dato) {
     var comunicados = document.getElementById('comunicados')
+    var div_contraseña = document.getElementById('div3')
+    div_contraseña.style.display = 'none'
     comunicados.style.display = 'none'
     // primero si el usuario ingresa una de las palabras reservadas 
     // ara una busqueda personalizada 
