@@ -271,7 +271,11 @@ function filtro(dato) {
 
                 break
         }
-    } else {
+    }else if(dato == ''){
+
+        imagen_no_resultados()
+
+    }else {
 
         var bandera = isNaN(dato);
 
