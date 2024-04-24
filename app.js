@@ -189,6 +189,26 @@ app.get('/grupos/' , (req,res) => {
 	})
 })
 
+app.get("/cambio/:matricula/:contra",(req,res) => {
+
+	// aqui aremos una consulta que haga la actualizacion 
+	var matricula = req.params.matricula
+	var contra = req.params.contra 
+	const consulta = "UPDATE alumnos SET contra = ? WHERE id = ?"
+	const consulta2 = "select id from alumnos where id = ?"
+	console.log(matricula)
+	console.log(contra)
+	conexion.query(consulta , [contra,matricula] , (error,resultado) => {
+		if(error){
+			console.log("error en la consulta")
+		}else{
+			
+			res.json(resultado)
+		}
+	})
+
+})
+
 // esta ruta es del boton cunado se presiona en busqueda que retorna 
 
 

@@ -153,34 +153,40 @@
         <br>
         <br>
         <label for="texto">Texto:</label>
-        <textarea id="texto" name="texto" rows="4" cols="50" required></textarea>
+        <textarea id="texto" name="texto" rows="4" cols="50" ></textarea>
         <br>
         <br>
         <button id="boton_coumicados">Enviar</button>
         
-    </div>
+    </div>  
 
     <div id="div3">
-        <form action="cambio_contraseña_exitoso.html" method="POST">
+        <form >
             <h2>Cambio de Contraseña</h2>
-            <label for="matricula">Matrícula:</label>
-            <input type="text" id="matricula" class="campos" name="matricula" required>
+            <label >Matrícula:</label>
+            <span id="mensaje"></span>
+            <input type="text" id="matricula" class="campos" name="matricula" >
             
-            <label for="nueva_contraseña">Nueva Contraseña:</label>
-            <input type="password" id="contraseña"  class="campos" name="nueva_contraseña" required>
             
-            <label for="validar_contraseña">Validar Contraseña:</label>
-            <input type="password" id="contraseña2" class="campos" name="validar_contraseña" required>
+            <label >Nueva Contraseña:</label>
+            <span id="mensaje2"></span>
+            <input type="password" id="contraseña"  class="campos" name="nueva_contraseña" >
             
-            <button class="boton_formulario" id="boton4">Enviar</button>
+
+            <label >Validar Contraseña:</label>
+            <span id="mensaje3"></span>
+            <input type="password" id="contraseña2" class="campos" >
+            
+            
         </form>
+        <button class="boton_formulario" id="boton4">Enviar</button>
        </div>
 
        <div id="div4">
         <form action="envio_exitoso.html" method="POST">
             <h2>Envío de Exámenes</h2>
             <label for="url">URL:</label>
-            <input type="url" id="url" name="url" required>
+            <input type="url" id="url" name="url" 
     
             <label for="grupo">Grupo:</label>
             <select id="grupo" name="grupo">
@@ -188,9 +194,10 @@
                 <option value="grupo2">Grupo 2</option>
                 <option value="grupo3">Grupo 3</option>
             </select>
-    
-            <button class="boton_formulario" id="boton5">Enviar</button>
-        </form>        
+            <button class="boton_formulario" id="boton5">Enviar</button> 
+            
+        </form>       
+        
        </div>
     
     <button id="boton1">Comunicados</button>
