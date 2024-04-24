@@ -43,9 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var div_tabla = document.getElementById('tablas')
         var div = document.getElementById('comunicados')
         var div_contraseña = document.getElementById('div3')
+        var div_examenes = document.getElementById('div4')
 
         div_tabla.innerHTML = ''
         div.style.display = 'block'
+        div_examenes.style.display = 'none'
         div_contraseña.style.display = 'none'
 
 
@@ -88,6 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
             mensaje2.innerHTML = "campo vacio"
             mensaje3.innerHTML = "campo vacio"
         }else if(contraseña != contraseña2){
+            mensaje.innerHTML = ""
+            mensaje2.innerHTML = ""
+            mensaje3.innerHTML = ""
+            mensaje2.innerHTML = "contraseñas no coinciden"
+            mensaje3.innerHTML = "constraseñas no coinciden"
             
         }else{
            console.log(matricula)
