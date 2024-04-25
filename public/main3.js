@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
-    boton2.addEventListener('click',function(){
+    boton2.addEventListener('click', function () {
         var div_contraseña = document.getElementById('div3')
         var div_tabla = document.getElementById('tablas')
         var comunicados = document.getElementById('comunicados')
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         div_tabla.innerHTML = " "
         comunicados.style.display = 'none'
     })
-    boton3.addEventListener('click' , function(){
+    boton3.addEventListener('click', function () {
         console.log("hola mundo")
         var div_examenes = document.getElementById('div4')
         var div_contraseña = document.getElementById('div3')
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         comunicados.style.display = 'none'
         div_examenes.style.display = "block"
     })
-    boton4.addEventListener('click' , function(){
+    boton4.addEventListener('click', function () {
         console.log("hola mundo")
         var matricula = document.getElementById("matricula").value
         var contraseña = document.getElementById("contraseña").value
@@ -83,37 +83,37 @@ document.addEventListener('DOMContentLoaded', function () {
         var mensaje2 = document.getElementById('mensaje2')
         var mensaje3 = document.getElementById('mensaje3')
         // primer filtro por si no hay ni un campo lleno 
-        if(matricula == "" || contraseña == "" || contraseña2 == ""){
+        if (matricula == "" || contraseña == "" || contraseña2 == "") {
             // campos vacios
-            imagen_no_resultados()
+
             mensaje.innerHTML = "campo vacio"
             mensaje2.innerHTML = "campo vacio"
             mensaje3.innerHTML = "campo vacio"
-        }else if(contraseña != contraseña2){
+        } else if (contraseña != contraseña2) {
             mensaje.innerHTML = ""
             mensaje2.innerHTML = ""
             mensaje3.innerHTML = ""
             mensaje2.innerHTML = "contraseñas no coinciden"
             mensaje3.innerHTML = "constraseñas no coinciden"
-            
-        }else{
-           console.log(matricula)
-           console.log(contraseña)
-           const url_cambio =  "http://127.0.0.1:3000/cambio/" + matricula + "/" + contraseña
-           fetch(url_cambio)
-           .then(response => {
-                if(!response.ok){
-                    imagen_404()
-                }else{
-                    return response.json()
-                }
-           })
-           .then(data => {
-               var arreglo = data 
-                console.log(arreglo)
-                console.log(arreglo.length)
-           })
-          
+
+        } else {
+            console.log(matricula)
+            console.log(contraseña)
+            const url_cambio = "http://127.0.0.1:3000/cambio/" + matricula + "/" + contraseña
+            fetch(url_cambio)
+                .then(response => {
+                    if (!response.ok) {
+                        imagen_404()
+                    } else {
+                        return response.json()
+                    }
+                })
+                .then(data => {
+                    var arreglo = data
+                    console.log(arreglo)
+                    console.log(arreglo.length)
+                })
+
         }
 
     })
@@ -127,6 +127,7 @@ function filtro(dato) {
     div_contraseña.style.display = 'none'
     div_examenes.style.display = 'none'
     comunicados.style.display = 'none'
+
     // primero si el usuario ingresa una de las palabras reservadas 
     // ara una busqueda personalizada 
     const palabra = ["alumnos", "docentes", "grupos"];
@@ -152,6 +153,11 @@ function filtro(dato) {
 
                         const arreglo = data;
                         const elementos = arreglo.length;
+
+                        /**
+                         * top: 100px;
+                           left: 180px;
+                         */
 
                         // Primero tomamos las llaves del primer elemento del arreglo 
                         const llaves = Object.keys(arreglo[0]);
@@ -192,6 +198,9 @@ function filtro(dato) {
                             tabla.appendChild(fila);
                         }
                         div_tabla.appendChild(tabla);
+                        div_tabla.style.position = 'absolute';
+                        div_tabla.style.top = '110px';
+                        div_tabla.style.left = '170px';
 
                     })
                     .catch(error => {
@@ -251,6 +260,9 @@ function filtro(dato) {
                         }
 
                         div_tabla2.appendChild(tabla);
+                        div_tabla2.style.position = 'absolute';
+                        div_tabla2.style.top = '160px';
+                        div_tabla2.style.left = '480px';
 
                     })
                     .catch(error => {
@@ -318,11 +330,11 @@ function filtro(dato) {
 
                 break
         }
-    }else if(dato == ''){
+    } else if (dato == '') {
 
         imagen_no_resultados()
 
-    }else {
+    } else {
 
         var bandera = isNaN(dato);
 
@@ -394,6 +406,9 @@ function filtro(dato) {
                                 tabla.appendChild(fila);
                             }
                             div.appendChild(tabla);
+                            div_tabla.style.position = 'absolute';
+                            div_tabla.style.top = '150px';
+                            div_tabla.style.left = '270px';
 
                         }
 
@@ -484,8 +499,11 @@ function imagen_404() {
     div.innerHTML = ' ';
     var imagen = document.createElement('img');
     imagen.setAttribute('src', '/icons/error_servidor.png');
-    imagen.setAttribute('width', '500px');
+    imagen.setAttribute('width', '700px');
     div.appendChild(imagen);
+    div.style.position = 'absolute';
+    div.style.top = '110px';
+    div.style.left = '420px';
 }
 
 function imagen_no_resultados() {
@@ -493,14 +511,20 @@ function imagen_no_resultados() {
     div.innerHTML = ' ';
     var imagen = document.createElement('img');
     imagen.setAttribute('src', '/icons/no_resultados.png');
-    imagen.setAttribute('width', '500px');
+    imagen.setAttribute('width', '700px');
     div.appendChild(imagen);
+    div.style.position = 'absolute';
+    div.style.top = '110px';
+    div.style.left = '420px';
 }
 function exito() {
     var div = document.getElementById('tablas');
     div.innerHTML = ' ';
     var imagen = document.createElement('img');
     imagen.setAttribute('src', '/icons/exito.png');
-    imagen.setAttribute('width', '500px');
+    imagen.setAttribute('width', '700px');
     div.appendChild(imagen);
+    div.style.position = 'absolute';
+    div.style.top = '110px';
+    div.style.left = '420px';
 }
