@@ -277,7 +277,9 @@
         <form action="envio_exitoso.html" method="POST">
             <h2>Envío de Exámenes</h2>
             <label for="url">URL:</label>
-            <input type="url" id="url" name="url" <label for="grupo">Grupo:</label>
+            <span id="mensaje3" class="mensajes"></span>
+            <input type="url" id="url" name="url"/>
+            <label for="grupo">Grupo:</label>
             <select id="grupo" name="grupo">
                 <option value="1ZUTCZR">1ZUTCZR</option>
                 <option value="2ZUTCZR">2ZUTCZR</option>
@@ -290,15 +292,17 @@
                 <option value="0ZUTCZR">9ZUTCZR</option>
             </select>
             <label>Matricula : </label>
-            <span id="mensaje3" class="mensajes"></span>
+            <span id="mensaje4" class="mensajes"></span>
             <input type="text" id="matricula2" class="campos">
             <label>Materia: </label>
-            <span id="mensaje4" class="mensajes"></span>
+            <span id="mensaje5" class="mensajes"></span>
             <input type="text" id="materia" class="campos">
             
-            <button class="boton_formulario" id="boton5">Enviar</button>
+            
 
         </form>
+
+        <button class="boton_formulario" id="boton5">Enviar</button>
 
     </div>
 

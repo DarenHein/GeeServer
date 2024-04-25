@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var boton4 = document.getElementById('boton4')
     var boton5 = document.getElementById('boton_alumnos')
     var boton6 = document.getElementById('boton_coumicados')
+    var boton7 = document.getElementById('boton5')
     /*
     const url = "";
 
@@ -184,6 +185,33 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(error)
         })
     })
+
+    boton7.addEventListener('click', function(){
+        var div_examenes = document.getElementById('div4');
+        var link = document.getElementById('url').value;
+        var grupo = document.getElementById('grupo');
+        var valorSeleccionado = grupo.value;
+        var matricula = document.getElementById('matricula2').value;
+        var materia = document.getElementById('materia').value;
+        var mensaje = document.getElementById('mensaje3');
+        var mensaje2 = document.getElementById('mensaje4');
+        var mensaje3 = document.getElementById('mensaje5');
+    
+        mensaje.innerHTML = ''; // Limpiamos el contenido de los mensajes antes de verificar
+        mensaje2.innerHTML = '';
+        mensaje3.innerHTML = '';
+    
+        if (link == "" || matricula == "" || materia == "") {
+            mensaje.innerHTML = "Campo vacío";
+            mensaje2.innerHTML = "Campo vacío";
+            mensaje3.innerHTML = "Campos vacíos";
+        } else {
+            div_examenes.innerHTML = "";
+            exito();
+        }
+    });
+    
+    
 });
 
 
