@@ -211,6 +211,22 @@ app.get("/cambio/:matricula/:contra",(req,res) => {
 
 // esta ruta es del boton cunado se presiona en busqueda que retorna 
 
-
+app.get('/comunicados/:grupo/:tipo/:texto' , (req,res) => {
+	var grupo = req.params.grupo 
+	var tipo = req.params.tipo
+	var texto = req.params.texto
+	console.log(grupo)
+	console.log(tipo)
+	console.log(texto)
+	var fecha = new Date();
+	const consultaComunicados = 'INSERT INTO comunicados (mensaje, id_grupo, fecha_envio, tipo_comunicado) VALUES (?,?,?,?)'
+	conexion.query(consultaComunicados , [texto,grupo,fecha,tipo] , (error , resultado) => {
+			if(error){
+				console.log('error en la consulta',error)
+			}else{
+				res.json(resultado)
+			}
+		})
+})
 
 module.exports = app 

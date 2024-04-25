@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var boton2 = document.getElementById('boton2')
     var boton3 = document.getElementById('boton3')
     var boton4 = document.getElementById('boton4')
+    var boton5 = document.getElementById('boton_alumnos')
+    var boton6 = document.getElementById('boton_coumicados')
     /*
     const url = "";
 
@@ -49,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
         div.style.display = 'block'
         div_examenes.style.display = 'none'
         div_contraseña.style.display = 'none'
+
+        
 
 
     })
@@ -123,6 +127,62 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(arreglo.length)
                 })
         }
+    })
+
+    boton5.addEventListener('click', function(){
+
+        var div_examenes = document.getElementById('div4')
+        var div_contraseña = document.getElementById('div3')
+        var div_tabla = document.getElementById('tablas')
+        var comunicados = document.getElementById('comunicados')
+        div_tabla.innerHTML = " "
+        div_contraseña.style.display = 'none'
+        comunicados.style.display = 'none'
+        div_examenes.style.display = "none"
+
+        var titulo = document.createElement('h1')
+        var  mensaje = document.createElement('h2')
+        titulo.innerHTML = "Mensajes"
+        mensaje.innerHTML = "Aun no cuentas con mensajes de tus alumnos"
+        div_tabla.appendChild(titulo)
+        div_tabla.appendChild(mensaje)
+
+        div_tabla.style.position = 'absolute';
+        div_tabla.style.top = '270px';
+        div_tabla.style.left = '370px';
+
+    })
+    boton6.addEventListener('click',function(){
+        console.log("hola mundo ")
+        var comunicados = document.getElementById('comunicados')
+        var grupo = document.getElementById('grupo')
+        var tipo = document.getElementById('tipo')
+        var textarea = document.getElementById("texto");
+        var valorSeleccionado = grupo.value;
+        var valorSeleccionado2 = tipo.value
+        var valorTextarea = textarea.value;
+        console.log(valorSeleccionado)
+        console.log(valorSeleccionado2)
+        console.log(valorTextarea)
+
+        // ahora va el fetch 
+        const url_comunicado = "http://127.0.0.1:3000/comunicados/" + valorSeleccionado + "/" + valorSeleccionado2 + "/" + valorTextarea
+
+        fetch(url_comunicado)
+        .then(response => {
+            if(!response.ok){
+                imagen_404()
+            }else{
+                return response.json()
+            }
+        })
+        .then(data => {
+            comunicados.innerHTML = ' '
+            exito()
+        })
+        .catch(error => {
+            console.log(error)
+        })
     })
 });
 
