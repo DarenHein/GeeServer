@@ -82,21 +82,30 @@ document.addEventListener('DOMContentLoaded', function () {
         var mensaje = document.getElementById('mensaje')
         var mensaje2 = document.getElementById('mensaje2')
         var mensaje3 = document.getElementById('mensaje3')
-        // primer filtro por si no hay ni un campo lleno 
-        if (matricula == "" || contraseña == "" || contraseña2 == "") {
-            // campos vacios
-
-            mensaje.innerHTML = "campo vacio"
-            mensaje2.innerHTML = "campo vacio"
-            mensaje3.innerHTML = "campo vacio"
-        } else if (contraseña != contraseña2) {
-            mensaje.innerHTML = ""
-            mensaje2.innerHTML = ""
-            mensaje3.innerHTML = ""
-            mensaje2.innerHTML = "contraseñas no coinciden"
-            mensaje3.innerHTML = "constraseñas no coinciden"
-
-        } else {
+        
+        mensaje.innerHTML = ""
+        mensaje2.innerHTML = ""
+        mensaje3.innerHTML = ""
+    
+        // Verificar campos vacíos
+        if (matricula == "") {
+            mensaje.innerHTML = "campo vacío"
+        }
+        if (contraseña == "") {
+            mensaje2.innerHTML = "campo vacío"
+        }
+        if (contraseña2 == "") {
+            mensaje3.innerHTML = "campo vacío"
+        }
+    
+        // Verificar si las contraseñas coinciden
+        if (contraseña != contraseña2) {
+            mensaje2.innerHTML = "Las contraseñas no coinciden"
+            mensaje3.innerHTML = "Las contraseñas no coinciden"
+        }
+    
+        // Si no hay campos vacíos ni contraseñas que no coinciden, proceder con la acción
+        if (matricula != "" && contraseña != "" && contraseña2 != "" && contraseña == contraseña2) {
             console.log(matricula)
             console.log(contraseña)
             const url_cambio = "http://127.0.0.1:3000/cambio/" + matricula + "/" + contraseña
@@ -113,9 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(arreglo)
                     console.log(arreglo.length)
                 })
-
         }
-
     })
 });
 
